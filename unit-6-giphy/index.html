@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Giphy API</title>
+  <!-- Bootstrap File -->
+  <link href = "assets/CSS/bootstrap/bootstrap.min.css" rel = "stylesheet">
+  <!--link     main-->
+  <link href = "assets/CSS/style.css" rel = "stylesheet">
+  
+</head>
+
+<body  onload = "buttons()">
+  <div  class ="cont">
+      <div class = "row">
+          <div  class = "col-xs-4" id ="container-btn">
+                
+          </div>
+          <div  class = "col-xs-3 text-center" id ="container-form">
+            <form id="word-form">
+                <label for="word-input"></label>
+                <input type="text" id="word-input">
+                <br>
+    
+            
+                <input id="wordinsert" type="submit" value="Make a new button">
+            </form>
+            <!--<button id ="thisisaddmore">Add more!</button>-->
+            <button id ="thisisfavorite">Favorite List</button>
+          </div>
+          </div>
+          </div>
+      
+      
+  <br><br><br>
+  <div id ="container" class = "container">
+  
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
+  <script src ="assets/JS/bootstrap/bootstrap.js"></script>
+  <script src = "assets/JS/giphy.js"></script>
+
+</body>
+
+</html>

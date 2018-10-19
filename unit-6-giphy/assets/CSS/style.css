@@ -1,0 +1,29 @@
+body {
+    background-color: lightgray;
+}
+.allimags{
+    height:250px;
+    width:250px;
+}
+#container-btn{
+    width:60%;
+    margin:10px;
+    position:relative;
+    
+    left:5px;
+}
+#container-form {
+    margin:40px;
+    position: relative;;
+    
+    right:40px;
+}
+.container{
+    margin:10px 62px 10px 62px;
+}
+#thisisfavorite {
+    margin: 25px;
+}
+#thisisaddmore {
+    margin: 25px;
+}
