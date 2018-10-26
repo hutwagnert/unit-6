@@ -4,7 +4,10 @@ var query = "&q="
 var queryURL = "";
 var bool = false;
 var num=0;
+var storagearray = [];
+var id ="";
 var gar =9;
+var cnt =1;
 
 var favorited = [];
 var uniquefavorited =[];
@@ -55,17 +58,21 @@ function buttons() {
 //make buttons
     for (i = 0; i < uniqueFoodlist.length; i++) {
         var button3 = $('<button>' + uniqueFoodlist[i] + '</button>')
-            .attr('id', uniqueFoodlist[i]).css({"margin":"8px", "background-color":"#008CBA"})
+            .attr('id', uniqueFoodlist[i]).css({"margin":"8px", "background-color":"#A9A9A9"})
             //.attr('onClick','viaclick()')
-            .addClass('btn');
+            .addClass('btn1 btn btn-secondary');
             
             $('#container-btn').append(button3);
         ;}    
 }
-$(document).on("click", ".btn", function () {
+$(document).on("click", ".btn1", function () {
     //clear all comlums
     reset();
-    var id = $(this).attr('id');
+    $(".rowformain").empty();
+    $(".rats").empty();
+    $(".allimags").empty();
+    resetetter()
+    id = $(this).attr('id');
    // $('#container-btn').append("button");
     
     query = "&q=" + id;
@@ -80,9 +87,12 @@ $(document).on("click", ".btn", function () {
         }     
     });
     buttons();
+ 
+
     setup(items);   
 });
 function setup(x) {
+    
         for (var l = 0; l < gar; l++){     
             var img = $('<img >'); //Equivalent: $(document.createElement('img'))
             var ratings =x.data[l].rating;
@@ -91,13 +101,13 @@ function setup(x) {
             {
                 var appendEl = $("<div class='row rowformain'></div>").appendTo("#container");//new row every 3 col
             }         
-            var coltoappendEl = $("<div class='col-xs-3'></div>").addClass([l]+'colum').attr('id',[l]+'colum'); 
+            var coltoappendEl = $("<div class='col-xs-3'></div>").addClass([l]+'colum').attr('id',[l]+'colum').css({"margin":"10px","background-color":"lightgray"});; 
             $(coltoappendEl).appendTo(appendEl);
            
-            var ratsdiv =$("<div class = 'text-center'></div>").addClass([l]+'rats text-center').css("marginTop","25px");
-            var imgdiv = $("<div class = 'allimags'></div>").addClass([l]+'imgs').attr('id',[l]+'colum').css("margin","25px");
+            var ratsdiv =$("<div class = 'text-center'></div>").addClass([l]+'rats text-center').css({"marginTop":"25px", "color":"#000000"});
+            var imgdiv = $("<div class = 'allimags'></div>").addClass([l]+'imgs').attr('id',[l]).css("margin","25px");
             var buttdiv =  $("<div class = 'newbutts'></div>").addClass([l]+'butts').attr('id','forbutt');
-           var forfavoriting = $('<button class = "buttforfav">"Favorite"</button>').attr('id',[l]+'favorites').css({"marginLeft":"25px","marginTop":"8px", "background-color":"#4CAF50"});
+           var forfavoriting = $('<button class = "buttforfav">"Favorite"</button>').attr('id',[l]).css({"marginLeft":"25px","marginTop":"8px", "background-color":"#4CAF50"});
             $(ratsdiv).appendTo(["."+[l]+"colum"]);
             $(imgdiv).appendTo(["."+[l]+"colum"]);
             $(buttdiv).appendTo(["."+[l]+"colum"]);
@@ -113,8 +123,8 @@ function setup(x) {
 
         $(document).on("click", ".allimags", function () {
             var whchid = $(this).attr('id');
-            var charatergrab =whchid.charAt(0);
-            
+            var charatergrab =whchid;
+            console.log(charatergrab);
     var newimg = $('<img >');
             $("."+[charatergrab]+"imgs").empty();
             $("."+[charatergrab]+"imgs").append(newimg.attr('src', items.data[charatergrab].images.fixed_height.url).addClass('allimages').height(250).width(250));            
@@ -122,7 +132,8 @@ function setup(x) {
 //add to array when green favorite is clicked
         $(document).on("click", ".buttforfav", function () {
             var wickedid = $(this).attr('id');
-            var grab1char   = wickedid.charAt(0);
+            console.log(wickedid);
+            var grab1char   = wickedid;
             
             favorited.push(items.data[grab1char].images.fixed_height_still.url);
             favoritedmoving.push(items.data[grab1char].images.fixed_height.url);
@@ -153,10 +164,10 @@ function setup(x) {
                 if(m==0 || m%3 ==0){
                     var appendL = $("<div class='row rowformain'></div>").appendTo("#container");//new row every 3 col
                 }         
-                var coltoappendL = $("<div class='col-xs-3'></div>").addClass([m]+'colum').attr('id',[m]+'colum'); 
+                var coltoappendL = $("<div class='col-xs-3'></div>").addClass([m]+'colum').attr('id',[m]+'colum').css({"border-style": "solid","border-width":"25px","border-color": "lightgray"}); 
                 $(coltoappendL).appendTo(appendL);
                 //var faratsdiv =$("<div class = 'text-center'></div>").addClass([m]+'favrat text-center').css("marginTop","25px");
-                var faimgdiv = $("<div class = 'favorimgs'></div>").addClass([m]+'favimgs').attr('id',[m]+'favs').css("margin","25px");
+                var faimgdiv = $("<div class = 'favorimgs'></div>").addClass([m]+'favimgs').attr('id',[m]);
                
               // var forfavoriting = $('<button class = "buttforfav">"Favorite"</button>').attr('id',[l]+'favorites').css({"marginLeft":"25px","marginTop":"8px", "background-color":"#4CAF50"});
                // $(faratsdiv).appendTo(["."+[l]+"colum"]);
@@ -169,23 +180,61 @@ function setup(x) {
 //turn on gif for fav
         $(document).on("click", ".favorimgs", function () {
             var favorimgid = $(this).attr('id');
-            var grabcharfrom   = favorimgid.charAt(0);
+            console.log(favorimgid);
+            var grabcharfrom   = favorimgid;
+            console.log(grabcharfrom);
             var favnewimg =$('<img >');
             $("."+[grabcharfrom]+"favimgs").empty();
             console.log(uniquefavoritedmoving);
-            $("."+[grabcharfrom]+"favimgs").append(favnewimg.attr('src', uniquefavoritedmoving[grabcharfrom]).addClass('favorimg').height(250).width(250));          
+            $("."+[grabcharfrom]+"favimgs").append(favnewimg.attr('src', uniquefavoritedmoving[grabcharfrom]).addClass('favorimg').height(250).width(250)).css({"border":"10px","background-color":"lightgray"});          
         });
-        // $(document).on("click", "#thisisaddmore", function () {
-        //         gar = gar + 9;
-        //         buttons(); 
-        // });
+         $(document).on("click", "#thisisaddmore", function () {
+            cnt = cnt+1;
+            gar = gar * cnt;
+            $(".rowformain").empty();
+            $(".rats").empty();
+            $(".allimags").empty();
+            buttons();
+            setup(items);
+         });
+
+        //  function addmyhiphyup(){
+        //      storagearray.push(id);
+        //      var copied = storagearray.slice(0);
+            
+             
+        //      var cnt = 0;
+        //      for (var r = 0; r < storagearray.length; r++) {
+        //          if (storagearray[r] == copied[r]) {
+        //             cnt= cnt +1;
+        //      }
+        //  }
+        //  if (cnt>1){
+        //      gar = cnt * 9;
+        //      buttons();
+        //      setup(items);
+        //  }
+        //  else if((cnt === 1) && (storagearray.length > 1)){
+        //     gar = 9; 
+        //     $(storagearray).empty();
+        //  }
+        //  else {
+        //     gar = 9;  
+        //  }
+        //  console.log(gar);
+        //  console.log(storagearray);
+        // }
 function reset() {
     if (bool) {
         $(".rowformain").empty();
         $(".rats").empty();
         $(".allimags").empty();
+        
         bool = false;        
     }
+}
+function resetetter(){
+    cnt =1;
 }
 $("#wordinsert").on("click", function(event) {
     // event.preventDefault() prevents submit button from trying to send a form.

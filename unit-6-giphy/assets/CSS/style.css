@@ -1,5 +1,7 @@
 body {
+    background-image: url("../images/nyan.jpg");
     background-color: lightgray;
+    margin: auto;
 }
 .allimags{
     height:250px;
@@ -7,7 +9,7 @@ body {
 }
 #container-btn{
     width:60%;
-    margin:10px;
+    margin:50px;
     position:relative;
     
     left:5px;
@@ -26,4 +28,10 @@ body {
 }
 #thisisaddmore {
     margin: 25px;
+}
+.btn-secondary {
+    background-color: #A9A9A9;
+}
+#wordinsert {
+    margin-top: 8px;
 }
